@@ -92,6 +92,39 @@ References
     Pandas documentation
     Matplotlib documentation
 
+
+    # Gradient Descent
+def gradient_descent(X, y, learning_rate, num_iterations):
+    num_samples, num_features = X.shape
+    theta = np.zeros(num_features)  # Initialize weights (coefficients) to zeros
+    losses = []
+
+    for _ in range(num_iterations):
+        # Calculate predictions
+        y_pred = sigmoid(np.dot(X, theta))  # Compute predictions using current weights
+
+        # Calculate loss
+        loss = binary_cross_entropy_loss(y, y_pred)  # Compute loss
+        losses.append(loss)
+
+        # Calculate gradients
+        gradient = np.dot(X.T, (y_pred - y)) / num_samples  # Compute gradients
+
+        # Update parameters (weights and bias)
+        theta -= learning_rate * gradient  # Adjust weights (coefficients)
+
+    return theta, losses
+
+    In this function:
+
+    The theta variable represents the parameters of the logistic regression model, which are the weights (coefficients). It is initialized with zeros.
+    Inside the loop, the predictions (y_pred) are computed using the current set of weights (theta) by performing a dot product between the feature matrix X and the weights.
+    The loss is computed using the binary cross-entropy loss function.
+    Gradients are calculated with respect to the loss function using the current set of predictions and the actual target values.
+    Finally, the parameters (weights) are updated by subtracting a fraction of the gradients, scaled by the learning rate (learning_rate).
+
+So, the adjustment of parameters (weights) occurs during the gradient descent process within the gradient_descent function.
+
 Credits
 
 This code is adapted from @sudheer debbati's implementation.
